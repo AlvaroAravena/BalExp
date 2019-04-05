@@ -182,7 +182,6 @@ if(sim_top == 2):
 	Hi = data_y[0]
 
 # DEFAULT PARAMETERS
-
 # Gravity
 g = 9.81
 
@@ -213,134 +212,93 @@ sol_2 = 0.5
 if( sim_mode == 3 ):
 
 	r_vector = np.random.normal(r, r_var, Nsim)
-
 	T0_vector = np.random.normal(T0, T0_var, Nsim)
-
 	u0_vector = np.random.normal(u0, u0_var, Nsim)
-
 	p0_vector = np.random.normal(p0, p0_var, Nsim)
-
 	ang0_vector = np.random.normal(ang0, ang0_var, Nsim)
-
 	Tt_vector = np.random.normal(Tt, Tt_var, Nsim)
-
 	alpha_g_0_vector = np.random.normal(alpha_g_0, alpha_g_0_var, Nsim)
-
 	x_dg_vector = np.random.normal(x_dg, x_dg_var, Nsim)
-
 	alpha_c_0_vector = np.random.normal(alpha_c_0, alpha_c_0_var, Nsim)
-
 	p_failure_vector = np.random.normal(p_failure, p_failure_var, Nsim)
-
 	relax_exsolution_vector = np.random.normal(relax_exsolution, relax_exsolution_var, Nsim)
-
 	relax_pressure_vector = np.random.normal(relax_pressure,relax_pressure_var, Nsim)
-
 	relax_crystallization_vector = np.random.normal(relax_crystallization, relax_crystallization_var, Nsim)
 
 	for i in range(Nsim):
 		if(r_vector[i] < 0.0):
 			r_vector[i] = np.random.normal(r, r_var, 1)
 			i = i - 1
-
 	for i in range(Nsim):
 		if(T0_vector[i] < 0.0):
 			T0_vector[i] = np.random.normal(T0, T0_var, 1)
 			i = i - 1
-
 	for i in range(Nsim):
 		if(u0_vector[i] < 0.0):
 			u0_vector[i] = np.random.normal(u0, u0_var, 1)
 			i = i - 1
-
 	for i in range(Nsim):
 		if(u0_vector[i] < 101325.0):
 			p0_vector[i] = np.random.normal(p0, p0_var, 1)
 			i = i - 1
-
 	for i in range(Nsim):
 		if(ang0_vector[i] < 0.0):
 			ang0_vector[i] = np.random.normal(ang0, ang0_var, 1)
 			i = i - 1
-
 	for i in range(Nsim):
 		if(alpha_g_0_vector[i] < 0.0 or alpha_g_0_vector[i] > 1.0):
 			alpha_g_0_vector[i] = np.random.normal(alpha_g_0, alpha_g_0_var, 1)
 			i = i - 1
-
 	for i in range(Nsim):
 		if(x_dg_vector[i] < 0.0 or x_dg_vector[i] > 1.0):
 			x_dg_vector[i] = np.random.normal(x_dg, x_dg_var, 1)
 			i = i - 1
-
 	for i in range(Nsim):
 		if(alpha_c_0_vector[i] < 0.0 or alpha_c_0_vector[i] > 1.0):
 			alpha_c_0_vector[i] = np.random.normal(alpha_c_0, alpha_c_0_var, 1)
 			i = i - 1
-
 	for i in range(Nsim):
 		if(p_failure_vector[i] < 0.0):
 			p_failure_vector[i] = np.random.normal(p_failure, p_failure_var, 1)
 			i = i - 1
-
 	for i in range(Nsim):
 		if(relax_exsolution_vector[i] < 0.0):
 			relax_exsolution_vector[i] = np.random.normal(relax_exsolution, relax_exsolution_var, 1)
 			i = i - 1
-
 	for i in range(Nsim):
 		if(relax_pressure_vector[i] < 0.0):
 			relax_pressure_vector[i] = np.random.normal(relax_pressure, relax_pressure_var, 1)
 			i = i - 1
-
 	for i in range(Nsim):
 		if(relax_crystallization_vector[i] < 0.0):
 			relax_crystallization_vector[i] = np.random.normal(relax_crystallization, relax_crystallization_var, 1)
 			i = i - 1
 else:
-
 	Nsim = 1
 
 if( sim_mode == 3 ):
-
 	Results = np.zeros((Nsim, 25))
 
 for sim in range(Nsim):
 
 	if( sim_mode == 3 ):
-
 		r = r_vector[sim]
-
 		T0 = T0_vector[sim]
-
 		u0 = u0_vector[sim]
-
 		p0 = p0_vector[sim]
-
 		ang0 = ang0_vector[sim]
-
 		Tt = Tt_vector[sim]
-
 		alpha_g_0 = alpha_g_0_vector[sim]
-
 		x_dg = x_dg_vector[sim]
-
 		alpha_c_0 = alpha_c_0_vector[sim]
-
 		p_failure = p_failure_vector[sim]
-
 		relax_exsolution = relax_exsolution_vector[sim]
-
 		relax_pressure = relax_pressure_vector[sim]
-
 		relax_crystallization = relax_crystallization_vector[sim]
-
 		Results[sim,0:13] = np.array([r, T0, u0, ang0, p0, Tt, alpha_g_0, x_dg, alpha_c_0, p_failure, relax_exsolution, relax_pressure, relax_crystallization])
 
 	# DEFINITIONS FOR BUBBLE DYNAMICS
-
 	if( alpha_g_0 < 0 or alpha_g_0 > 1 or alpha_c_0 < 0 or alpha_c_0 > 1):
-
 		print 'Incompatible volume fraction of gas and crystals.'
 		sys.exit(0)
 
@@ -362,14 +320,10 @@ for sim in range(Nsim):
 	skip_boolean = 0
 
 	if( rho_B_d < 0 ):
-	
 		if( sim_mode < 3 ):
-
 			print 'Incompatible crystal content and mass fraction of water.'
 			sys.exit(0)
-
 		else:
-
 			skip_boolean = 1
 
 	# Bulk density of melt (excluding dissolved water)
@@ -382,7 +336,6 @@ for sim in range(Nsim):
 	rho_bomb = ( rho_B_g + rho_B_md + rho_B_c )
 
 	if( sim_mode == 3 ):
-
 		Results[sim,13] = rho_bomb
 
 	# Strength
@@ -399,89 +352,63 @@ for sim in range(Nsim):
 	mesh = Grid1D( nx = N, dx = r / N )
 
 	Temperature = CellVariable( name = "Temperature", mesh = mesh , value = T0 , hasOld = True)
-
 	MassGas = CellVariable( name = "MassGas", mesh = mesh , value = rho_B_g , hasOld = True)
-
 	MassTotal = CellVariable( name = "MassTotal", mesh = mesh , value = rho_B_g + rho_B_md + rho_B_c, hasOld = True)
-
 	VolumeGas = CellVariable( name = "VolumeGas", mesh = mesh , value = alpha_g_0 , hasOld = True)
-
 	MassCrystals = CellVariable( name = "MassCrystals", mesh = mesh , value = rho_B_c , hasOld = True)
 
 	current_time = 0
 
 	mu = mu_r * ( Tinf / T_r ) ** 0.7
-
 	if( sim_mode == 1 ):
-
 		rho = rho_atm
-
 	else:
 
 		rho = rho_0 * exp( - Hi / H_atm )
 
 	ang = ang0 * np.pi / 180.0
-
 	u = u0
-
 	vx = u0 * np.cos(ang)
-
 	vy = u0 * np.sin(ang)
 
 	itmax = 10000
-
 	velocity = np.zeros( (itmax, 1) )
-
 	velocity[0,0] = u
 
 	T = np.zeros( ( itmax , N ) )
-
 	T[ 0 , 0 : N ] = Temperature.getValue()[ 0 : N ]
-
 	mass_g = np.zeros( ( itmax , N ) )
-
 	mass_g[0,0:N] = MassGas.getValue()[ 0 : N ] 
-
 	vol_g = np.zeros( ( itmax , N ) )
-
 	vol_g[0,0:N] = VolumeGas.getValue()[ 0 : N ] 
 
 	p_g = np.zeros( ( itmax , N ) )
-
 	p_g[0,0:N] = mass_g[0,0:N] / vol_g[0,0:N] * R_gas * T[0,0:N] / mw_water
 
 	vol_c = np.zeros( ( itmax , N ) )
-
 	vol_c[0,0:N] =  MassCrystals.getValue()[ 0 : N ] / rho_c / (1 - vol_g[0,0:N])
 
 	time = np.zeros( (itmax, 1) )
 
 	hf_c = np.zeros( (itmax, 1) )
-
 	hf_r = np.zeros( (itmax, 1) )
 
 	current_height = Hi
 
 	height = np.zeros( (itmax, 1) )
-
 	height[0,0] = current_height
 
 	current_distance = 0
 
 	distance = np.zeros( (itmax, 1) )
-
 	distance[0,0] = current_distance
 
 	max_pressure_rind = np.zeros( (itmax, 1) )
 
 	TemperatureAnalytical = CellVariable(name="analytical value", mesh = mesh)
-
 	MassGasAnalytical = CellVariable(name="analytical value", mesh = mesh)
-
 	MassTotalAnalytical = CellVariable(name="analytical value", mesh = mesh)
-
 	VolumeGasAnalytical = CellVariable(name="analytical value", mesh = mesh)
-
 	MassCrystalsAnalytical = CellVariable(name="analytical value", mesh = mesh)
 
 	timeStepDuration = 0.01
@@ -507,6 +434,8 @@ for sim in range(Nsim):
 	for step in range(itmax):
 
 		current_time = current_time + timeStepDuration
+
+		print(current_time, Temperature.getValue()[0])
 
 		time[ step + 1 , 0 ] = current_time
 
@@ -584,7 +513,7 @@ for sim in range(Nsim):
 
 		velocity[ step + 1 , 0 ] = u
 
-		if( boolean_expansion == 0 ):
+		if( boolean_expansion == 0 or boolean_ground == 0 ):
 
 			mu_s = mu_r * ( Temperature.getValue()[N-1] / 273.15 ) ** 0.7 
 
@@ -666,7 +595,7 @@ for sim in range(Nsim):
 
 				max_pressure_rind[step + 1] = max(p_g[step + 1, aux_rind : N ])
 
-			if( p_failure < max_pressure_rind[step] ):
+			if( p_failure < max_pressure_rind[step] and boolean_expansion == 0 ):
 
 				boolean_expansion = 1
 
@@ -752,7 +681,7 @@ for sim in range(Nsim):
 
 				rho_bomb = solid_mass / ( 4.0 * np.pi / 3.0 * r_e ** 3.0 )
 
-		if( Temperature.getValue()[0] < Tt and boolean_ground == 1 ):
+		if( Temperature.getValue()[0] < Tt - 100 and boolean_ground == 1 ):
 
 			tf = current_time
 
@@ -866,7 +795,14 @@ for sim in range(Nsim):
 
 			break
 
-		timeStepDuration = min(timeStepDuration * 1.1, 1.0)
+		Aux_pg = (p_g[ step + 1 ,  2 : N ] - p_g[ step+1,  1 : N - 1 ]) *  (p_g[ step+1 ,  1 : N - 1 ] - p_g[ step + 1,  0 : N - 2 ])
+
+		wh = np.where(Aux_pg < 0)
+
+		if( len(wh[0]) < 3 ) : 
+			timeStepDuration = min(timeStepDuration * 1.05, 10 * r  )
+		else:
+			timeStepDuration = max(timeStepDuration * 0.5, r )
 
 		if( sim_top == 2 ):
 
@@ -888,15 +824,17 @@ for sim in range(Nsim):
 
 				dt = timeStepDuration * j / 100.0
 
-				for i in range(len(data_x)):
+				if( sim_top == 2 ):
 
-					if( data_x[i] > current_distance + vx * dt ):
+					for i in range(len(data_x)):
 
-						factor = ( data_x[i] - ( current_distance + vx * dt ) ) / (data_x[i] - data_x[i-1])
+						if( data_x[i] > current_distance + vx * dt ):
 
-						Hf = factor * data_y[i-1] + ( 1 - factor ) * data_y[i]
+							factor = ( data_x[i] - ( current_distance + vx * dt ) ) / (data_x[i] - data_x[i-1])
 
-						break
+							Hf = factor * data_y[i-1] + ( 1 - factor ) * data_y[i]
+
+							break
 
 				if( current_height + dt * vy <= Hf ):
 				
@@ -942,7 +880,15 @@ if( sim_mode < 3 ):
 
 		plt.figure()
 
-		plt.plot(distance, height, 'b')
+		plt.plot(distance, height, 'b', label = 'Ballistic projectile')
+
+		if( sim_top == 2 ):
+
+			plt.plot(data_x, data_y, 'k', label = 'Topography')
+
+		if( boolean_expansion == 1 ):
+
+			plt.plot( distance_expansion, height_expansion, 'ro', label = 'Expansion position')
 
 		plt.xlabel('Horizontal distance $[m]$')
 
@@ -950,25 +896,13 @@ if( sim_mode < 3 ):
 
 		plt.title('Trajectory')
 
-		if( sim_top == 2 ):
-
-			plt.plot(data_x, data_y, 'k')
-
-		if( boolean_expansion == 1):
-
-			plt.plot( distance_expansion, height_expansion, 'ro')
-
-			plt.legend(['Ballistic projectile', 'Topography', 'Expansion position'], 'upper right', numpoints = 1)
-
-		else:
-
-			plt.legend(['Ballistic projectile', 'Topography'], 'upper right', numpoints = 1)
+		plt.legend()
 
 		# Horizontal distance
 
 		plt.figure()
 
-		plt.plot(time, distance, 'b')
+		plt.plot(time, distance, 'b',  label = 'Ballistic projectile')
 
 		plt.xlabel('Time $[s]$')
 
@@ -978,19 +912,15 @@ if( sim_mode < 3 ):
 
 		if( boolean_expansion == 1):
 
-			plt.plot( t_expansion, distance_expansion, 'ro')
+			plt.plot( t_expansion, distance_expansion, 'ro', label = 'Expansion position')
 
-			plt.legend(['Ballistic projectile', 'Expansion position'], 'lower right', numpoints = 1)
-
-		else:
-
-			plt.legend(['Ballistic projectile'], 'lower right', numpoints = 1)
+		plt.legend()
 
 		# Vertical position
 
 		plt.figure()
 
-		plt.plot(time, height, 'b')
+		plt.plot(time, height, 'b',  label = 'Ballistic projectile')
 
 		plt.xlabel('Time $[s]$')
 
@@ -1000,19 +930,15 @@ if( sim_mode < 3 ):
 
 		if( boolean_expansion == 1):
 
-			plt.plot( t_expansion, height_expansion, 'ro')
+			plt.plot( t_expansion, height_expansion, 'ro', label = 'Expansion position')
 
-			plt.legend(['Ballistic projectile', 'Expansion position'], 'upper right', numpoints = 1)
-
-		else:
-
-			plt.legend(['Ballistic projectile'], 'upper right', numpoints = 1)
+		plt.legend()
 
 		# Velocity
 
 		plt.figure()
 
-		plt.plot(time, velocity, 'b')
+		plt.plot(time, velocity, 'b', label = 'Ballistic projectile')
 
 		plt.xlabel('Time $[s]$')
 
@@ -1022,13 +948,9 @@ if( sim_mode < 3 ):
 
 		if( boolean_expansion == 1):
 
-			plt.plot( t_expansion, velocity_expansion, 'ro')
+			plt.plot( t_expansion, velocity_expansion, 'ro', label = 'Expansion position')
 
-			plt.legend(['Ballistic projectile', 'Expansion position'], 'upper right', numpoints = 1)
-
-		else:
-
-			plt.legend(['Ballistic projectile'], 'upper right', numpoints = 1)	
+		plt.legend()
 
 	if( boolean_expansion == 1 ):
 
@@ -1076,8 +998,6 @@ if( sim_mode < 3 ):
 
 		timesplot = np.arange(0, t_expansion+1e-5, t_expansion / 5.0)
 
-		legend_string = []
-
 		for i in range(len(timesplot)):
 
 			time_obj = timesplot[i]
@@ -1086,9 +1006,7 @@ if( sim_mode < 3 ):
 
 				if(time_obj == time_expansion[j] ):
 
-					plt.plot(100 * mesh.cellCenters()[0], T[j,:] - 273.15)
-
-					legend_string.append('t = ' + str(round(time_obj,2)) + ' s')
+					plt.plot(100 * mesh.cellCenters()[0], T[j,:] - 273.15, label = 't = ' + str(round(time_obj,2)) + ' s')
 
 					break
 
@@ -1098,17 +1016,13 @@ if( sim_mode < 3 ):
 
 					Taux = (1 - factor) * T[j,:] + factor * T[j-1,:]
 
-					plt.plot(100 * mesh.cellCenters()[0], Taux - 273.15)
-
-					legend_string.append('t = ' + str(round(time_obj,2)) + ' s')
+					plt.plot(100 * mesh.cellCenters()[0], Taux - 273.15, label = 't = ' + str(round(time_obj,2)) + ' s')
 
 					break
 
-		plt.plot(100 * mesh.cellCenters()[0], 0*mesh.cellCenters()[0] + Tt - 273.15, 'k:')
+		plt.plot(100 * mesh.cellCenters()[0], 0*mesh.cellCenters()[0] + Tt - 273.15, 'k:', label = 'Glass transition temperature')
 
-		legend_string.append('Glass transition temperature')
-
-		plt.legend(legend_string, 'lower left')
+		plt.legend()
 
 		plt.xlabel('Distance along the ballistic projectile $[cm]$')
 
@@ -1124,8 +1038,6 @@ if( sim_mode < 3 ):
 
 		distancesplot = np.arange(0, r, r/5.0)
 
-		legend_string = []
-
 		for i in range(len(distancesplot)):
 
 			distance_obj = distancesplot[i]
@@ -1134,9 +1046,7 @@ if( sim_mode < 3 ):
 
 				if(distance_obj == mesh.cellCenters()[0][j]):
 
-					plt.plot(time_expansion, T[:,j] - 273.15)
-
-					legend_string.append('r = ' + str(100 * distance_obj) + ' cm')
+					plt.plot(time_expansion, T[:,j] - 273.15, label = 'r = ' + str(100 * distance_obj) + ' cm')
 
 					break
 
@@ -1146,21 +1056,15 @@ if( sim_mode < 3 ):
 
 					Taux = (1 - factor) * T[:,j] + factor * T[:,j-1]
 
-					plt.plot(time_expansion, Taux - 273.15)
-
-					legend_string.append('r = ' + str(100 * distance_obj) + ' cm from bomb core')
+					plt.plot(time_expansion, Taux - 273.15, label = 'r = ' + str(100 * distance_obj) + ' cm from bomb core')
 
 					break
 
-		plt.plot(time_expansion, T[:,N-1] - 273.15)
+		plt.plot(time_expansion, T[:,N-1] - 273.15, label = 'r = ' + str(100 * r) + ' cm from bomb core')
 
-		legend_string.append('r = ' + str(100 * r) + ' cm from bomb core')
+		plt.plot(time_expansion, 0*time_expansion + Tt - 273.15, 'k:', label = 'Glass transition temperature')
 
-		plt.plot(time_expansion, 0*time_expansion + Tt - 273.15, 'k:')
-
-		legend_string.append('Glass transition temperature')
-
-		plt.legend(legend_string, 'lower left')
+		plt.legend()
 
 		plt.xlabel('Time $[s]$')
 
@@ -1176,9 +1080,9 @@ if( sim_mode < 3 ):
 
 		plt.figure()
 
-		plt.semilogy(time_expansion, hf_c)
+		plt.semilogy(time_expansion, hf_c, label = 'Convective heat flux')
 
-		plt.semilogy(time_expansion, hf_r)
+		plt.semilogy(time_expansion, hf_r, label = 'Radiative heat flux')
 
 		plt.ylabel('Heat flux per unit area $[W/m^2]$')
 
@@ -1186,7 +1090,7 @@ if( sim_mode < 3 ):
 
 		plt.title('Heat flux per unit area before expansion')
 
-		plt.legend(['Convective heat flux', 'Radiative heat flux'])
+		plt.legend()
 
 		plt.xlim([0, t_expansion])
 
@@ -1266,7 +1170,7 @@ if( sim_mode < 3 ):
 
 		print 'Rind vesicularity: ' + str(round((VolumeGas.faceValue()[N-1] )*100,2)) + ' vol%.'
 
-		print 'Core vesicularity: ' + str(round((VolumeGas.faceValue()[0] ))*100,2) + ' vol%.'
+		print 'Core vesicularity: ' + str(round((VolumeGas.faceValue()[0] )*100,2)) + ' vol%.'
 
 	print 'Rind crystallinity: ' + str( round(100 * MassCrystals.faceValue()[N-1] / rho_c / (1 - VolumeGas.faceValue()[N-1] ),2)) + ' vol%.'
 
@@ -1278,8 +1182,6 @@ if( sim_mode < 3 ):
 
 		timesplot = np.arange(0, t_expansion + 1e-5, t_expansion / 5.0)
 
-		legend_string = []
-
 		for i in range(len(timesplot)):
 
 			time_obj = timesplot[i]
@@ -1288,9 +1190,7 @@ if( sim_mode < 3 ):
 
 				if(time_obj == time_expansion[j]):
 
-					plt.plot(100 * mesh.cellCenters()[0], mass_g[j,:])
-
-					legend_string.append('t = ' + str(round(time_obj,2)) + ' s')
+					plt.plot(100 * mesh.cellCenters()[0], mass_g[j,:], label = 't = ' + str(round(time_obj,2)) + ' s')
 
 					break
 
@@ -1300,13 +1200,11 @@ if( sim_mode < 3 ):
 
 					Taux = (1 - factor) * mass_g[j,:] + factor * mass_g[j-1,:]
 
-					plt.plot(100 * mesh.cellCenters()[0], Taux)
-
-					legend_string.append('t = ' + str(round(time_obj,2)) + ' s')
+					plt.plot(100 * mesh.cellCenters()[0], Taux, label = 't = ' + str(round(time_obj,2)) + ' s')
 
 					break
 
-		plt.legend(legend_string, 'lower left')
+		plt.legend()
 
 		plt.xlabel('Distance along the ballistic projectile $[cm]$')
 
@@ -1330,8 +1228,6 @@ if( sim_mode < 3 ):
 
 		timesplot = np.arange(0, t_expansion + 1e-5, t_expansion / 5.0)
 
-		legend_string = []
-
 		for i in range(len(timesplot)):
 
 			time_obj = timesplot[i]
@@ -1340,9 +1236,7 @@ if( sim_mode < 3 ):
 
 				if(time_obj == time_expansion[j]):
 
-					plt.plot(100 * mesh.cellCenters()[0], vol_g[j,:])
-
-					legend_string.append('t = ' + str(round(time_obj,2)) + ' s')
+					plt.plot(100 * mesh.cellCenters()[0], vol_g[j,:], label = 't = ' + str(round(time_obj,2)) + ' s')
 
 					break
 
@@ -1352,13 +1246,11 @@ if( sim_mode < 3 ):
 
 					Taux = (1 - factor) * vol_g[j,:] + factor * vol_g[j-1,:]
 
-					plt.plot(100 * mesh.cellCenters()[0], Taux)
-
-					legend_string.append('t = ' + str(round(time_obj,2)) + ' s')
+					plt.plot(100 * mesh.cellCenters()[0], Taux, label = 't = ' + str(round(time_obj,2)) + ' s')
 
 					break
 
-		plt.legend(legend_string, 'lower left')
+		plt.legend()
 
 		plt.xlabel('Distance along the ballistic projectile $[cm]$')
 
@@ -1382,8 +1274,6 @@ if( sim_mode < 3 ):
 
 		timesplot = np.arange(0, t_expansion + 1e-5, t_expansion / 5.0)
 
-		legend_string = []
-
 		for i in range(len(timesplot)):
 
 			time_obj = timesplot[i]
@@ -1392,9 +1282,7 @@ if( sim_mode < 3 ):
 
 				if(time_obj == time_expansion[j]):
 
-					plt.plot(100 * mesh.cellCenters()[0], p_g[j,:]/1e6)
-
-					legend_string.append('t = ' + str(round(time_obj,2)) + ' s')
+					plt.plot(100 * mesh.cellCenters()[0], p_g[j,:]/1e6, label = 't = ' + str(round(time_obj,2)) + ' s')
 
 					break
 
@@ -1404,13 +1292,11 @@ if( sim_mode < 3 ):
 
 					Taux = (1 - factor) * p_g[j,:] + factor * p_g[j-1,:]
 
-					plt.plot(100 * mesh.cellCenters()[0], Taux/1e6)
-
-					legend_string.append('t = ' + str(round(time_obj,2)) + ' s')
+					plt.plot(100 * mesh.cellCenters()[0], Taux/1e6, label = 't = ' + str(round(time_obj,2)) + ' s')
 
 					break
 
-		plt.legend(legend_string, 'lower left')
+		plt.legend()
 
 		plt.xlabel('Distance along the ballistic projectile $[cm]$')
 
@@ -1480,8 +1366,6 @@ if( sim_mode < 3 ):
 
 		timesplot = np.arange(0, t_expansion + 1e-5, t_expansion / 5.0)
 
-		legend_string = []
-
 		for i in range(len(timesplot)):
 
 			time_obj = timesplot[i]
@@ -1490,9 +1374,7 @@ if( sim_mode < 3 ):
 
 				if(time_obj == time_expansion[j]):
 
-					plt.plot(100 * mesh.cellCenters()[0], vol_c[j,:])
-
-					legend_string.append('t = ' + str(round(time_obj,2)) + ' s')
+					plt.plot(100 * mesh.cellCenters()[0], vol_c[j,:], label = 't = ' + str(round(time_obj,2)) + ' s')
 
 					break
 
@@ -1502,13 +1384,11 @@ if( sim_mode < 3 ):
 
 					Taux = (1 - factor) * vol_c[j,:] + factor * vol_c[j-1,:]
 
-					plt.plot(100 * mesh.cellCenters()[0], Taux)
-
-					legend_string.append('t = ' + str(round(time_obj,2)) + ' s')
+					plt.plot(100 * mesh.cellCenters()[0], Taux, label = 't = ' + str(round(time_obj,2)) + ' s')
 
 					break
 
-		plt.legend(legend_string, 'lower left')
+		plt.legend()
 
 		plt.xlabel('Distance along the ballistic projectile $[cm]$')
 

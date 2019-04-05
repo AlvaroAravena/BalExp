@@ -7,10 +7,10 @@ sim_mode = 2
 # Simulation topography (if it is absent, sim_top = 1).
 # sim_top = 1 => Considering Hi and Hf.
 # sim_top = 2 => Considering an input topography (input_topography.py, see example. It must start with 0).
-sim_top = 2
+sim_top = 1
 
 # Radius of the particle (m). Fixed for sim_mode = 1 and 2. Mean value for sim_mode = 3.
-r = 0.10
+r = 0.05
 
 # Initial temperature of the particle (K). Fixed for sim_mode = 1 and 2. Mean value for sim_mode = 3.
 T0 = 1073.15
